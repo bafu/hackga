@@ -12,6 +12,13 @@ jobs:
       - name: Debug
         uses: crazy-max/ghaction-dump-context@v1
 
+      - name: Check if version has been updated
+        id: version_check
+        uses: EndBug/version-check@v2
+        with:
+          diff-search: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create GitHub prerelease
         id: create_release
         # context property
