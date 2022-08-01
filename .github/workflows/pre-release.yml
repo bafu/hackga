@@ -1,0 +1,22 @@
+name: pre-release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create-github-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub prerelease
+        id: create_release
+        if: steps.version_check.outputs.changed == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version_check.outputs.version }}
+          release_name: ${{ steps.version_check.outputs.version }}
+          body: Thanks for following along! For more information check out the [CHANGELOG](https://github.com/bafu/hackga/blob/master/CHANGELOG.md).
+          prerelease: true

@@ -1,0 +1,42 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Run linter
+        run:
+          echo "Running linter"
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Run unit tests
+        run:
+          echo "Running unit tests"
+
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    needs: [lint, test]
+
+    steps:
+      - name: Build Android codes
+        run:
+          echo "Building Android codes"
+
+  ios:
+    runs-on: macos-latest
+    timeout-minutes: 60
+    needs: [lint, test]
+
+    steps:
+      - name: Build iOS codes
+        run:
+          echo "Building iOS codes"
