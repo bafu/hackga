@@ -2,9 +2,8 @@ name: build
 
 on:
   push:
-    branches: [ develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*', master ]
   pull_request:
-    branches: [ develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
+    branches: [ master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
 
 jobs:
   lint:
