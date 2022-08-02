@@ -2,9 +2,9 @@ name: build
 
 on:
   push:
+  pull_request:
     branches:
       - [master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*']
-  #pull_request:
 
 jobs:
   lint:
