@@ -3,10 +3,11 @@ name: build
 on:
   push:
     branches:
-      - [master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*']
-  pull_request:
-    branches:
-      - [master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*']
+      - [master, develop]
+  #    - [master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*']
+  #pull_request:
+  #  branches:
+  #    - [master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*']
 
 jobs:
   lint:
