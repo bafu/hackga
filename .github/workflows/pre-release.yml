@@ -33,10 +33,15 @@ jobs:
           script: |
             return context.payload.ref.replace(/\/refs\/tags\//, '');
 
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+
       - name: Echo
         run:
           echo ${{ steps.version_check.outputs.version }}
           echo ${{ steps.tag.outputs.result }}
+          echo ${{ steps.get_version.outputs.version }}
 
       - name: Create GitHub prerelease
         id: create_release
