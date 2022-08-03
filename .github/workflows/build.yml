@@ -6,7 +6,7 @@ on:
   pull_request:
     # target branches
     branches: [ main, develop ]
-    types: [ review_requested, edited ]
+    types: [ opened, edited ]
 
 jobs:
   android:
