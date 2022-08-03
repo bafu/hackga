@@ -2,7 +2,8 @@ name: build
 
 on:
   pull_request:
-    branches: [ master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
+    # target branches
+    branches: [ main, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
 
 jobs:
   android:
