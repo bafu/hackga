@@ -1,12 +1,11 @@
 name: build
 
-# When developer sends a PR review or updates afterwards,
+# When developer opens/reopens a PR or updates afterwards,
 # this workflow helps check the building correctness.
 on:
   pull_request:
     # target branches
     branches: [ main, develop ]
-    types: [ opened, edited ]
 
 jobs:
   print_context:
