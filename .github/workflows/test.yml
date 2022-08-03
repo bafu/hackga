@@ -1,0 +1,24 @@
+name: test
+
+on:
+  push:
+    branches: [ master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Run linter
+        run:
+          echo "Running linter"
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Run unit tests
+        run:
+          echo "Running unit tests"

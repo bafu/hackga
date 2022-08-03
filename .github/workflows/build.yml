@@ -1,29 +1,10 @@
 name: build
 
 on:
-  push:
   pull_request:
-    branches: [ master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
+    branches: [ develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Run linter
-        run:
-          echo "Running linter"
-
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Run unit tests
-        run:
-          echo "Running unit tests"
-
   android:
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -43,3 +24,14 @@ jobs:
       - name: Build iOS codes
         run:
           echo "Building iOS codes"
+
+      - name: Get release version
+        id: version_check
+        uses: EndBug/version-check@v2
+        with:
+          diff-search: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show release version
+        run:
+          echo ${{ steps.version_check.outputs.version }}
