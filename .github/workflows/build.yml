@@ -1,14 +1,24 @@
 name: build
 
+# When developer opens/reopens a PR or updates afterwards,
+# this workflow helps check the building correctness.
 on:
   pull_request:
-    branches: [ master, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
+    # target branches
+    branches: [ main, develop ]
 
 jobs:
+  print_context:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
+
   android:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    needs: [lint, test]
 
     steps:
       - name: Build Android codes
@@ -18,20 +28,8 @@ jobs:
   ios:
     runs-on: macos-latest
     timeout-minutes: 60
-    needs: [lint, test]
 
     steps:
       - name: Build iOS codes
         run:
           echo "Building iOS codes"
-
-      - name: Get release version
-        id: version_check
-        uses: EndBug/version-check@v2
-        with:
-          diff-search: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Show release version
-        run:
-          echo ${{ steps.version_check.outputs.version }}
