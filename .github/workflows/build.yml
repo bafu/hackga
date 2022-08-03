@@ -1,14 +1,17 @@
 name: build
 
+# When developer sends a PR review or updates afterwards,
+# this workflow helps check the building correctness.
 on:
   pull_request:
-    branches: [ main, develop, 'feature-*', 'fix-*', 'hotfix-*', 'release-*' ]
+    # target branches
+    branches: [ main, develop ]
+    types: [ review_requested, edited ]
 
 jobs:
   android:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    needs: [lint, test]
 
     steps:
       - name: Build Android codes
@@ -18,7 +21,6 @@ jobs:
   ios:
     runs-on: macos-latest
     timeout-minutes: 60
-    needs: [lint, test]
 
     steps:
       - name: Build iOS codes
