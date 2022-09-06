@@ -43,15 +43,25 @@ jobs:
           echo ${{ steps.tag.outputs.result }}
           echo ${{ steps.get_version.outputs.version }}
 
+      #- name: Create GitHub prerelease
+      #  id: create_release
+      #  # context property
+      #  if: steps.version_check.outputs.changed == 'true'
+      #  uses: actions/create-release@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    tag_name: ${{ steps.version_check.outputs.version }}
+      #    release_name: ${{ steps.version_check.outputs.version }}
+      #    body: Thanks for following along! For more information check out the [CHANGELOG](https://github.com/bafu/hackga/blob/master/CHANGELOG.md).
+      #    prerelease: true
+
       - name: Create GitHub prerelease
-        id: create_release
-        # context property
-        if: steps.version_check.outputs.changed == 'true'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          tag_name: ${{ steps.version_check.outputs.version }}
-          release_name: ${{ steps.version_check.outputs.version }}
-          body: Thanks for following along! For more information check out the [CHANGELOG](https://github.com/bafu/hackga/blob/master/CHANGELOG.md).
+          body: Thanks for following along! For more information check out the [CHANGELOG](https://coming.soon).
+          files: |
+            bumper.txt
+            LICENSE
           prerelease: true
