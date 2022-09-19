@@ -66,6 +66,8 @@ jobs:
             LICENSE
           prerelease: true
 
+  # The artifacts are available on the workflow page.
+  # Ex: https://github.com/bafu/hackga/actions/runs/3081995410
   upload-artifacts:
     runs-on: ubuntu-latest
     steps:
@@ -74,7 +76,7 @@ jobs:
       - name: Upload my bumper
         uses: actions/upload-artifact@v3
         with:
-          name: my-bumper.txt
+          #name: my-bumper.txt
           path: ./bumper.txt
 
       - name: List current directory
@@ -89,7 +91,8 @@ jobs:
       - name: Download my bumper
         uses: actions/download-artifact@v3
         with:
-          name: my-bumper.txt
+          #name: my-bumper.txt
+          name: bumper.txt
 
       - name: List current directory
         run: ls
