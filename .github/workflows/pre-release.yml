@@ -65,3 +65,30 @@ jobs:
             bumper.txt
             LICENSE
           prerelease: true
+
+  upload-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Upload my bumper
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-bumper.txt
+          path: ./world.txt
+
+      - name: List current directory
+        run: ls
+
+  download-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download my bumper
+        uses: actions/download-artifact@v3
+        with:
+          name: my-bumper.txt
+
+      - name: List current directory
+        run: ls
