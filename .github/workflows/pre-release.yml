@@ -75,7 +75,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: my-bumper.txt
-          path: ./world.txt
+          path: ./my-bumper.txt
 
       - name: List current directory
         run: ls
